@@ -48,7 +48,7 @@
   ov.querySelectorAll('.ge-tabs button').forEach(b=>{b.classList.toggle('on',b.dataset.k==tab);b.innerHTML=`<span>${CATS.find(c=>c[0]==b.dataset.k)[1]}</span><i>${W[b.dataset.k].length}</i>`});
   const arr=W[tab];
   list.innerHTML=arr.length?arr.map((x,i)=>`<div class="ge-c${x.g?' ing':''}${sel.has(x)?' sel':''}" draggable="true" data-i="${i}" style="${x.g?`--gc:${gcol(x.g)}`:''}">
-   <div class="ge-t"><img src="${x.src}" alt="" draggable="false"><span class="ge-no">${i+1}</span><button class="ge-sel${sel.has(x)?' on':''}" title="고르기"></button>${x.g?`<span class="ge-gt" style="background:${gcol(x.g)}">묶음</span>`:''}<button class="ge-del" title="삭제">×</button></div>
+   <div class="ge-t"><img src="${x.src}" alt="" draggable="false"><span class="ge-no">${i+1}</span><button class="ge-sel${sel.has(x)?' on':''}" title="고르기"></button>${x.g?`<span class="ge-gt" style="background:${gcol(x.g)}">묶음</span>`:''}<button class="ge-del" title="삭제"><svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true"><path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button></div>
    <input class="ge-n" value="${esc(x.t)}" placeholder="이름">
    <select class="ge-k">${CATS.map(([k,l])=>`<option value="${k}"${k==tab?' selected':''}>${l}</option>`).join('')}</select></div>`).join('')
    :'<div class="gnone">이 분류에는 이미지가 없어요</div>';

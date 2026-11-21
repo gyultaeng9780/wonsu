@@ -178,7 +178,7 @@ body{min-height:900px}
 .bgmt{width:40px;height:22px;border-radius:11px;background:#3a3a3e;border:0;position:relative;cursor:pointer;vertical-align:middle;margin-right:8px}.bgmt i{position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#bbb;transition:left .2s}
 .bgmt.on{background:#b3121b}.bgmt.on i{left:21px;background:#fff}#bgm-s{font-size:12px;color:#ddd;vertical-align:middle}
 .bgmn{margin-top:12px;font-size:12px;color:#aaa}.bgmn span{color:#666}
-.bgmc{display:flex;gap:6px;margin-top:8px}.bgmc button{width:32px;height:28px;border:1px solid #333;border-radius:4px;background:none;color:#aaa;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px}
+.bgmc{display:flex;gap:6px;margin-top:8px}.bgmc button{width:32px;height:28px;border:1px solid #333;border-radius:4px;background:none;color:#aaa;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0;line-height:0;padding:0}
 @media (max-width:900px){.bgm{display:none}.ftw{grid-template-columns:1fr;text-align:center}.ftr{text-align:left}}
 /* 카드 안 세로 가운데 정렬: 내용이 짧으면 가운데, 길면 위에서부터 스크롤 */
 .box{display:flex;flex-direction:column;overflow-anchor:none}.box>*{flex-shrink:0}html{overflow-anchor:none}
@@ -245,7 +245,7 @@ body{min-height:900px}
 .pf-v{width:100%;height:470px;display:flex;align-items:center;justify-content:center}
 .pf-v img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;cursor:zoom-in;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 .pf-c{display:flex;align-items:center;gap:18px;font:12px/1 monospace;letter-spacing:.2em;color:#8a8a90}
-.pf-b{width:34px;height:34px;display:flex;align-items:center;justify-content:center;padding:0 0 2px;border:1px solid #3c3c40;border-radius:50%;background:none;color:#cfcfd2;font-size:20px;line-height:1;cursor:pointer}
+.pf-b{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1px solid #3c3c40;border-radius:50%;background:none;color:#cfcfd2;font-size:0;line-height:0;padding:0;cursor:pointer}
 .pf-b:hover{border-color:#b3121b;color:#b3121b}
 
 .ged{display:flex;align-items:center;gap:14px}
@@ -267,7 +267,7 @@ body{min-height:900px}
 .ge-t{position:relative;aspect-ratio:1;background:#111;border-radius:6px;overflow:hidden}
 .ge-t img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .ge-no{position:absolute;left:6px;top:6px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#000b;color:#ddd;font:11px/1 ui-monospace,monospace;display:flex;align-items:center;justify-content:center}
-.ge-del{position:absolute;right:6px;top:6px;width:24px;height:24px;border-radius:50%;border:0;background:#000b;color:#ddd;font-size:16px;line-height:1;display:flex;align-items:center;justify-content:center;padding:0 0 2px;cursor:pointer}
+.ge-del{position:absolute;right:6px;top:6px;width:24px;height:24px;border-radius:50%;border:0;background:#000b;color:#ddd;font-size:0;line-height:0;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
 .ge-del:hover{background:#b3121b;color:#fff}
 .ge-n,.ge-k{height:32px;background:#151516;border:1px solid #333;border-radius:5px;color:#ddd;font:12px 'Noto Sans KR',sans-serif;padding:0 8px;width:100%}
 .ge-n:focus,.ge-k:focus{outline:0;border-color:#b3121b}
@@ -329,7 +329,7 @@ body{min-height:900px}
  <div class="bgm"><div class="bgmh">BGM</div>
   <button class="bgmt" id="bgm-t" aria-label="배경음악 켜기"><i></i></button><span id="bgm-s">꺼짐</span>
   <div class="bgmn" id="bgm-n">♪ —<br><span>플레이리스트</span></div>
-  <div class="bgmc"><button id="bgm-p" aria-label="이전 곡">⏮</button><button id="bgm-x" aria-label="재생">▶</button><button id="bgm-f" aria-label="다음 곡">⏭</button></div><audio id="bgm-a"></audio></div>
+  <div class="bgmc"><button id="bgm-p" aria-label="이전 곡"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 3v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M13 3.5v9L6 8z" fill="currentColor"/></svg></button><button id="bgm-x" aria-label="재생"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3l8 5-8 5z" fill="currentColor"/></svg></button><button id="bgm-f" aria-label="다음 곡"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M12 3v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3 3.5v9L10 8z" fill="currentColor"/></svg></button></div><audio id="bgm-a"></audio></div>
 </nav>
 
 <main class="wrap">
@@ -352,7 +352,7 @@ body{min-height:900px}
  <div class="ph"><div><div class="k">FILE 0429 · 인물</div><h2 class="serif">인물</h2></div><div class="ged"><p>No.01 · No.02</p><button class="ge-open" data-tab="frame">이미지 편집</button></div></div>
  <div class="pf">
   <div class="pf-v"><img id="pf-img" alt=""></div>
-  <div class="pf-c"><button class="pf-b" id="pf-p" aria-label="이전">‹</button><span id="pf-n">1 / 2</span><button class="pf-b" id="pf-x" aria-label="다음">›</button></div>
+  <div class="pf-c"><button class="pf-b" id="pf-p" aria-label="이전"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3L5 8L10 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span id="pf-n">1 / 2</span><button class="pf-b" id="pf-x" aria-label="다음"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3L11 8L6 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
  </div>
  <div class="sec"><div class="tlh2">함께</div><div class="gal" data-g="pair"></div></div>
 </div></section>
@@ -416,10 +416,10 @@ body{min-height:900px}
 </div></section>
 </main>
 
-<div class="lb" id="lb"><button class="lx" aria-label="닫기">✕</button><button class="lp" aria-label="이전">‹</button><img alt=""><p></p><button class="ln" aria-label="다음">›</button></div>
-<script src="street.js?v=20261121b"></script>
-<script src="marker.js?v=20261121b"></script>
-<script src="qna.js?v=20261121b" defer></script>
+<div class="lb" id="lb"><button class="lx" aria-label="닫기"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><button class="lp" aria-label="이전"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3L5 8L10 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><img alt=""><p></p><button class="ln" aria-label="다음"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3L11 8L6 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+<script src="street.js?v=20261121c"></script>
+<script src="marker.js?v=20261121c"></script>
+<script src="qna.js?v=20261121c" defer></script>
 <script>
 // ── 페이지 전환
 function route(){
@@ -522,7 +522,7 @@ const DAYS=['일','월','화','수','목','금','토'];const DSTR=`${TODAY.getMo
 // ── 배경음악 (플레이리스트 곡에 src로 mp3 경로를 넣으면 재생돼요)
 (function(){const a=document.getElementById('bgm-a'),t=document.getElementById('bgm-t'),s=document.getElementById('bgm-s'),nm=document.getElementById('bgm-n'),x=document.getElementById('bgm-x');
  const list=()=>[...PLAY.a.tracks.map(v=>({...v,who:'원상혁'})),...PLAY.b.tracks.map(v=>({...v,who:'오수연'}))];let i=0,on=false;
- const show=()=>{const v=list()[i];nm.innerHTML=`♪ ${v.t}<br><span>${v.who}의 플레이리스트</span>`;t.classList.toggle('on',on);s.textContent=on?'켜짐':'꺼짐';x.textContent=on?'❚❚':'▶'};
+ const show=()=>{const v=list()[i];nm.innerHTML=`♪ ${v.t}<br><span>${v.who}의 플레이리스트</span>`;t.classList.toggle('on',on);s.textContent=on?'켜짐':'꺼짐';x.innerHTML=on?'<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><rect x="4" y="3" width="3" height="10" rx=".5" fill="currentColor"/><rect x="9" y="3" width="3" height="10" rx=".5" fill="currentColor"/></svg>':'<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3l8 5-8 5z" fill="currentColor"/></svg>'};
  const play=()=>{const v=list()[i];if(!v.src){on=true;show();s.textContent='음원 없음';return}a.src=v.src;a.play().then(()=>{on=true;show()}).catch(()=>{on=false;show()})};
  const stop=()=>{a.pause();on=false;show()};
  t.onclick=x.onclick=()=>on?stop():play();
@@ -540,6 +540,6 @@ const GAL={"frame": [{"src": "gallery/pair/pair05.jpg", "w": 1600, "h": 686, "t"
 route();setTimeout(()=>document.querySelectorAll('.page.on').forEach(p=>p._up&&p._up()),60);
 </script>
 
-<script src="gal-edit.js?v=20261121b" defer></script>
+<script src="gal-edit.js?v=20261121c" defer></script>
 </body>
 </html>
