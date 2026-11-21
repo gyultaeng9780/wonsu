@@ -1,7 +1,7 @@
 // ── 갤러리 그리기 + 이미지 편집 (분류 이동 · 이름 수정 · 삭제 · 드래그 순서)
 // 저장: QNA_URL(구글 시트)이 있으면 시트에, 없으면 이 브라우저에만 저장
 (function(){
- const CATS=[['frame','페어틀'],['pair','함께'],['sang','상혁이네'],['su','수연이네'],['shop','소품샵']];
+ const CATS=[['frame','페어틀'],['pair','공원'],['sang','상혁이네'],['su','수연이네'],['shop','소품샵']];
  const LS='wonsu_gal';
  const esc=s=>String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
  CATS.forEach(([k])=>{if(!GAL[k])GAL[k]=[]});

@@ -175,8 +175,8 @@ body{min-height:900px}
 /* BGM */
 .bgm{margin-top:30px;width:200px;border-top:1px solid #333;padding-top:16px;line-height:1.4}
 .bgmh{font:11px ui-monospace,monospace;letter-spacing:3px;color:#777;margin-bottom:10px}
-.bgmt{width:40px;height:22px;border-radius:11px;background:#3a3a3e;border:0;position:relative;cursor:pointer;vertical-align:middle;margin-right:8px}.bgmt i{position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#bbb;transition:left .2s}
-.bgmt.on{background:#b3121b}.bgmt.on i{left:21px;background:#fff}#bgm-s{font-size:12px;color:#ddd;vertical-align:middle}
+.bgmrow{display:flex;align-items:center;gap:8px}.bgmt{flex:none;width:40px;height:22px;border-radius:11px;background:#3a3a3e;border:0;padding:0 3px;margin:0;cursor:pointer;display:flex;align-items:center;justify-content:flex-start;box-sizing:border-box}.bgmt i{display:block;width:16px;height:16px;border-radius:50%;background:#bbb;transition:transform .2s}
+.bgmt.on{background:#b3121b}.bgmt.on i{transform:translateX(18px);background:#fff}#bgm-s{font-size:12px;line-height:22px;color:#ddd}
 .bgmn{margin-top:12px;font-size:12px;color:#aaa}.bgmn span{color:#666}
 .bgmc{display:flex;gap:6px;margin-top:8px}.bgmc button{width:32px;height:28px;border:1px solid #333;border-radius:4px;background:none;color:#aaa;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0;line-height:0;padding:0}
 @media (max-width:900px){.bgm{display:none}.ftw{grid-template-columns:1fr;text-align:center}.ftr{text-align:left}}
@@ -319,6 +319,7 @@ body{min-height:900px}
  <a href="#home" data-p="home">주거지역</a>
  <a href="#home-a" class="sub" data-p="home-a">└ 상혁이네</a>
  <a href="#home-b" class="sub" data-p="home-b">└ 수연이네</a>
+ <a href="#park" class="sub" data-p="park">└ 공원</a>
  <a href="#shop" data-p="shop">소품샵</a>
  
  
@@ -327,7 +328,7 @@ body{min-height:900px}
  
  <a href="#playlist" data-p="playlist">플레이리스트</a>
  <div class="bgm"><div class="bgmh">BGM</div>
-  <button class="bgmt" id="bgm-t" aria-label="배경음악 켜기"><i></i></button><span id="bgm-s">꺼짐</span>
+  <div class="bgmrow"><button class="bgmt" id="bgm-t" aria-label="배경음악 켜기"><i></i></button><span id="bgm-s">꺼짐</span></div>
   <div class="bgmn" id="bgm-n">♪ —<br><span>플레이리스트</span></div>
   <div class="bgmc"><button id="bgm-p" aria-label="이전 곡"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 3v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M13 3.5v9L6 8z" fill="currentColor"/></svg></button><button id="bgm-x" aria-label="재생"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M5 3l8 5-8 5z" fill="currentColor"/></svg></button><button id="bgm-f" aria-label="다음 곡"><svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M12 3v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M3 3.5v9L10 8z" fill="currentColor"/></svg></button></div><audio id="bgm-a"></audio></div>
 </nav>
@@ -354,7 +355,6 @@ body{min-height:900px}
   <div class="pf-v"><img id="pf-img" alt=""></div>
   <div class="pf-c"><button class="pf-b" id="pf-p" aria-label="이전"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3L5 8L10 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span id="pf-n">1 / 2</span><button class="pf-b" id="pf-x" aria-label="다음"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3L11 8L6 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
  </div>
- <div class="sec"><div class="tlh2">함께</div><div class="gal" data-g="pair"></div></div>
 </div></section>
 
 <section class="page" id="p-fortune"><div class="box">
@@ -391,6 +391,10 @@ body{min-height:900px}
  <div class="ph"><div><div class="k">FILE 0429 · 수연이네</div><h2 class="serif">수연이네</h2></div><div class="ged"><p>오수연의 집</p><button class="ge-open" data-tab="su">이미지 편집</button></div></div>
  <div class="sec"><div class="gal" data-g="su"></div></div></div>
 </div></section>
+<section class="page" id="p-park"><div class="box">
+ <div class="ph"><div><div class="k">FILE 0429 · 공원</div><h2 class="serif">공원</h2></div><div class="ged"><p>둘이 마주친 곳</p><button class="ge-open" data-tab="pair">이미지 편집</button></div></div>
+ <div class="sec"><div class="gal" data-g="pair"></div></div>
+</div></section>
 <section class="page" id="p-shop"><div class="box">
  <div class="ph"><div><div class="k">FILE 0429 · GOODS</div><h2 class="serif">소품샵</h2></div><div class="ged"><p>커미션 굿즈</p><button class="ge-open" data-tab="shop">이미지 편집</button></div></div>
  <div class="sec"><div class="grid" data-shop></div></div>
@@ -417,9 +421,9 @@ body{min-height:900px}
 </main>
 
 <div class="lb" id="lb"><button class="lx" aria-label="닫기"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><button class="lp" aria-label="이전"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3L5 8L10 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><img alt=""><p></p><button class="ln" aria-label="다음"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3L11 8L6 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
-<script src="street.js?v=20261121c"></script>
-<script src="marker.js?v=20261121c"></script>
-<script src="qna.js?v=20261121c" defer></script>
+<script src="street.js?v=20261121d"></script>
+<script src="marker.js?v=20261121d"></script>
+<script src="qna.js?v=20261121d" defer></script>
 <script>
 // ── 페이지 전환
 function route(){
@@ -540,6 +544,6 @@ const GAL={"frame": [{"src": "gallery/pair/pair05.jpg", "w": 1600, "h": 686, "t"
 route();setTimeout(()=>document.querySelectorAll('.page.on').forEach(p=>p._up&&p._up()),60);
 </script>
 
-<script src="gal-edit.js?v=20261121c" defer></script>
+<script src="gal-edit.js?v=20261121d" defer></script>
 </body>
 </html>
