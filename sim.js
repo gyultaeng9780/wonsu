@@ -6,7 +6,7 @@
  // 장소별 위치(거리 좌표)
  const POS={수연이네:118,공원:292,편의점:424,마트:510,정육점:588,백화점:706,회사:860,체육관:994,상혁이네:1112};
  const CROSS=[344,882];
- // 건물 안에 있을 때 핀을 올릴 지붕 높이 (거리 그림 기준, 숫자가 작을수록 위)
+ // 건물 안으로 치는 장소 (공원은 바깥)
  const ROOF={수연이네:31,편의점:61,마트:49,정육점:57,백화점:16,회사:16,체육관:39,상혁이네:45};
  const ro=w=>{const c=w.charCodeAt(w.length-1)-0xAC00;const j=c%28;return (j===0||j===8)?'로':'으로'};
  const NAME={sang:'원상혁',su:'오수연'};
@@ -125,7 +125,7 @@
    if(L.wait>0){L.wait-=dt}else if(Math.abs(L.x-L.to)>1){const dir=Math.sign(L.to-L.x);
     for(const cx of CROSS){if(!L.crossed[cx]&&(L.x-cx)*(L.x+dir*25*dt-cx)<=0){L.crossed[cx]=1;if(hash(cx+m+who.length)<.45){L.wait=2;log(`${NAME[who]}은 횡단보도 앞에서 신호를 기다렸다.`,hm(d))}}}
     if(L.wait<=0){L.x+=dir*Math.min(25*dt,Math.abs(L.to-L.x));if(Math.abs(L.x-L.to)<=1){L.x=L.to;log(`${NAME[who]}은 ${s[1]}에 도착했다.`,hm(d));L.next=Date.now()+4000+Math.random()*4000}}}
-   CHARS[who].x=L.x;CHARS[who].y=(Math.abs(L.x-L.to)<=1&&ROOF[L.slot[1]]!=null)?ROOF[L.slot[1]]:null;place(who);
+   CHARS[who].x=L.x;CHARS[who].inside=Math.abs(L.x-L.to)<=1&&ROOF[L.slot[1]]!=null;place(who);
    if(Date.now()>L.next&&Math.abs(L.x-L.to)<=1){{const P=pool(who,L.slot);let s;do{s=P[Math.floor(Math.random()*P.length)]}while(P.length>1&&s===L.lastLine);L.lastLine=s;log(s,hm(d))};L.next=Date.now()+5000+Math.random()*5000}}
   // 마주침
   const gap=Math.abs(live.sang.x-live.su.x);
