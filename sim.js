@@ -37,19 +37,23 @@
    sleep:['원상혁은 아직 자고 있다. 알람은 이미 두 번 꺼졌다.','원상혁은 이불을 걷어찼다. 다시 잠들었다.'],
    morning:['원상혁은 편의점에서 단백질 음료를 집었다. 두 병이다.','원상혁은 편의점 앞에서 하품을 했다. 아직 잠이 덜 깼다.','원상혁은 계산대에 삼각김밥 세 개를 올려놨다.'],
    gym:['원상혁은 체육관 셔터를 올렸다. 샌드백이 어제 그대로다.','원상혁은 줄넘기를 했다. 바닥이 울린다.','원상혁은 샌드백을 쳤다. 소리가 거리까지 들린다.','원상혁은 거울 앞에서 섀도복싱을 했다.'],
-   lunch:['원상혁은 고기를 두 근 샀다. 점심이다.','원상혁은 장바구니에 닭가슴살을 쓸어 담았다.','원상혁은 계산하며 거스름돈을 대충 받았다.'],
+   'lunch@정육점':['원상혁은 고기를 두 근 샀다. 점심이다.','원상혁은 정육점 사장님과 부위 얘기를 했다.','원상혁은 계산하며 거스름돈을 대충 받았다.'],
+   'lunch@마트':['원상혁은 장바구니에 닭가슴살을 쓸어 담았다.','원상혁은 계란 한 판을 들었다. 한 손으로.','원상혁은 계산하며 거스름돈을 대충 받았다.'],
    coach:['원상혁은 회원에게 가드를 올리라고 소리쳤다.','원상혁은 미트를 잡아 줬다. 회원이 먼저 지쳤다.','원상혁은 스파링을 봐 줬다. 표정이 험하다.','원상혁은 체육관 바닥을 대충 닦았다.'],
-   night:['원상혁은 편의점에서 맥주 한 캔을 샀다.','원상혁은 공원을 몇 바퀴 뛰었다. 숨도 안 찬다.','원상혁은 가로등 아래서 스트레칭을 했다.'],
+   'night@편의점':['원상혁은 편의점에서 맥주 한 캔을 샀다.','원상혁은 편의점 앞 파라솔에 앉아 컵라면을 먹었다.','원상혁은 계산대 앞에서 담배 진열대를 보다 말았다.'],
+   'night@공원':['원상혁은 공원을 몇 바퀴 뛰었다. 숨도 안 찬다.','원상혁은 가로등 아래서 스트레칭을 했다.','원상혁은 철봉에 매달려 턱걸이를 했다.'],
    home:['원상혁은 집에 돌아왔다. 소파에 그대로 누웠다.','원상혁은 격투기 경기를 틀어 놓고 잠들었다.']},
   su:{
    sleep:['오수연은 자고 있다. 알람보다 먼저 깰 예정이다.','오수연은 잠결에 내일 일정을 떠올렸다.'],
    work:['오수연은 장부를 펼쳤다. 숫자가 맞지 않는다.','오수연은 영수증 더미를 정리했다. 하나가 빈다.','오수연은 엑셀 수식을 고쳤다. 이번엔 맞았다.','오수연은 결재 서류를 되돌려 보냈다. 빨간 펜 자국이 선명하다.','오수연은 커피를 한 잔 더 내렸다. 오늘 세 번째다.'],
    lunch:['오수연은 편의점에서 삼각김밥을 먹었다. 평범한 맛이다.','오수연은 컵라면 물을 정확히 선까지 부었다.','오수연은 영수증을 접어 지갑에 넣었다.'],
-   shop:['오수연은 가격표를 하나하나 비교했다.','오수연은 할인 상품만 골라 담았다.','오수연은 영수증을 받아 합계를 다시 계산했다.'],
+   'shop@마트':['오수연은 가격표를 하나하나 비교했다.','오수연은 할인 상품만 골라 담았다.','오수연은 영수증을 받아 합계를 다시 계산했다.'],
+   'shop@백화점':['오수연은 백화점을 한 바퀴 돌았다. 아무것도 사지 않았다.','오수연은 정장 가격표를 보고 조용히 내려놨다.','오수연은 지하 식품관에서 반찬 두 개를 샀다.'],
    walk:['오수연은 공원 벤치에 앉아 일정을 정리했다.','오수연은 공원을 한 바퀴 걸었다. 정확히 20분.','오수연은 산책하다 휴대폰으로 메일을 확인했다.'],
    extra:['오수연은 주말인데 회사에 나왔다. 아무도 없다.','오수연은 다음 주 결산을 미리 해 뒀다.'],
    home:['오수연은 집에 돌아와 가계부를 썼다.','오수연은 내일 입을 옷을 미리 걸어 뒀다.']}
  };
+ const pool=(who,q)=>T[who][q[2]+'@'+q[1]]||T[who][q[2]];
  const MEET=[
   ['원상혁과 오수연이 {p}에서 마주쳤다. 공기가 싸늘해졌다.','오수연은 못 본 척 지나갔다.'],
   ['원상혁은 {p}에서 오수연을 발견했다. 혀를 찼다.','오수연은 들리게 한숨을 쉬었다.'],
@@ -74,16 +78,19 @@
 
  // 오늘 지금까지 있었던 일 미리 채우기
  (function backfill(){
-  const d=now(),m=d.getHours()*60+d.getMinutes(),k=dkey(d),ev=[];
-  for(const who of ['sang','su']){const p=plan(who,d);p.forEach((q,i)=>{if(q[0]>m||q[0]===0)return;
-   ev.push([q[0],`${NAME[who]}은 ${q[1]}${ro(q[1])} 향했다.`]);
-   const n=Math.min(2,Math.floor(((p[i+1]?p[i+1][0]:1440)-q[0])/40));
-   for(let j=1;j<=n;j++){const tt=q[0]+Math.round(j*((p[i+1]?p[i+1][0]:1440)-q[0])/(n+1));if(tt<=m)ev.push([tt,pick(T[who][q[2]],k*31+i*7+j)])}})}
-  // 일정상 같은 곳에 있었던 시간 = 마주침
-  const A=plan('sang',d),B=plan('su',d);
-  for(let t=1;t<=m;t+=5){const a=slotAt('sang',d,t),b=slotAt('su',d,t);if(a[1]===b[1]&&a[1]!=='상혁이네'&&a[1]!=='수연이네'){
-   const st=Math.max(a[0],b[0]);const tm=mm2(st+3);if(!meets.some(x=>x.p===a[1]&&x.t===tm)){addMeet(tm,a[1]);const L=pick(MEET,k+st);ev.push([st+3,L[0].replace('{p}',a[1])]);ev.push([st+4,L[1]])}t=st+60}}
-  ev.sort((x,y)=>x[0]-y[0]).slice(-14).forEach(e=>log(e[1],mm2(e[0])));
+  const d=now(),m=d.getHours()*60+d.getMinutes(),ev=[];
+  const y=new Date(d.getTime()-864e5);
+  // 어제 저녁부터 지금까지 있었던 일 (어제 것은 -1440분)
+  for(const [day,off,until] of [[y,-1440,1440],[d,0,m]]){const k=dkey(day);
+   for(const who of ['sang','su']){const p=plan(who,day);p.forEach((q,i)=>{const end=p[i+1]?p[i+1][0]:1440;
+    if(q[0]>until)return;
+    if(q[0]>0)ev.push([q[0]+off,`${NAME[who]}은 ${q[1]}${ro(q[1])} 향했다.`]);
+    const n=Math.min(2,Math.floor((end-q[0])/40));
+    for(let j=1;j<=n;j++){const tt=q[0]+Math.round(j*(end-q[0])/(n+1));if(tt<=until)ev.push([tt+off,pick(pool(who,q),k*31+i*7+j)])}})}
+   // 일정상 같은 곳에 있었던 시간 = 마주침 (오늘 것만 횟수에 셈)
+   for(let t=1;t<=until;t+=5){const a=slotAt('sang',day,t),b=slotAt('su',day,t);if(a[1]===b[1]&&a[1]!=='상혁이네'&&a[1]!=='수연이네'){
+    const st=Math.max(a[0],b[0]);if(off===0)addMeet(mm2(st+3),a[1]);const L=pick(MEET,k+st);ev.push([st+3+off,L[0].replace('{p}',a[1])]);ev.push([st+4+off,L[1]]);t=st+60}}}
+  ev.filter(e=>e[0]>m-1440).sort((x,z)=>x[0]-z[0]).slice(-14).forEach(e=>log(e[1],mm2((e[0]+1440)%1440)));
  })();
  drawMeets();
 
@@ -116,7 +123,7 @@
     for(const cx of CROSS){if(!L.crossed[cx]&&(L.x-cx)*(L.x+dir*9*dt-cx)<=0){L.crossed[cx]=1;if(hash(cx+m+who.length)<.45){L.wait=6;log(`${NAME[who]}은 횡단보도 앞에서 신호를 기다렸다.`,hm(d))}}}
     if(L.wait<=0){L.x+=dir*Math.min(9*dt,Math.abs(L.to-L.x));if(Math.abs(L.x-L.to)<=1){L.x=L.to;log(`${NAME[who]}은 ${s[1]}에 도착했다.`,hm(d));L.next=Date.now()+30000+Math.random()*30000}}}
    CHARS[who].x=L.x;place(who);
-   if(Date.now()>L.next&&Math.abs(L.x-L.to)<=1){log(pick(T[who][L.slot[2]],Date.now()>>10),hm(d));L.next=Date.now()+40000+Math.random()*40000}}
+   if(Date.now()>L.next&&Math.abs(L.x-L.to)<=1){{const P=pool(who,L.slot);let s;do{s=P[Math.floor(Math.random()*P.length)]}while(P.length>1&&s===L.lastLine);L.lastLine=s;log(s,hm(d))};L.next=Date.now()+40000+Math.random()*40000}}
   // 마주침
   const gap=Math.abs(live.sang.x-live.su.x);
   if(gap<22&&!near){near=true;const p=nearest((live.sang.x+live.su.x)/2);
