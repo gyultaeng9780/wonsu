@@ -286,6 +286,20 @@ body{min-height:900px}
  .side{left:calc(40px + var(--ox,0px))}
  .bgchar{left:calc(80px + var(--ox,0px))}
 }
+
+.gstack{position:absolute;right:8px;top:8px;min-width:26px;height:26px;padding:0 8px;border-radius:13px;background:#000b;color:#fff;font:600 11px/1 ui-monospace,monospace;display:flex;align-items:center;justify-content:center;gap:0;z-index:2;box-shadow:3px -3px 0 -1px #ffffff40,6px -6px 0 -2px #ffffff26}
+.it .im{position:relative}
+.gi.grp::after,.it.grp .im::after{content:"";position:absolute;inset:0;border-radius:8px;box-shadow:inset 0 0 0 1px #ffffff22;pointer-events:none}
+.ge-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 24px 0}
+.ge-bar .ge-tip{padding:0}
+.ge-gb{display:flex;gap:6px;flex-shrink:0}
+.ge-gb button{height:30px;padding:0 12px;border:1px solid #3c3c40;border-radius:6px;background:none;color:#ccc;font:12px 'Noto Sans KR',sans-serif;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.ge-gb button:hover{border-color:#b3121b;color:#fff}
+.ge-sel{position:absolute;left:6px;bottom:6px;width:22px;height:22px;border-radius:50%;border:2px solid #fff;background:#0006;cursor:pointer;padding:0}
+.ge-sel.on{background:#b3121b;border-color:#fff;box-shadow:inset 0 0 0 3px #b3121b,inset 0 0 0 5px #fff}
+.ge-gt{position:absolute;right:6px;bottom:6px;height:20px;padding:0 8px;border-radius:10px;color:#fff;font:11px/1 'Noto Sans KR',sans-serif;display:flex;align-items:center;justify-content:center}
+.ge-c.ing{border-color:var(--gc)}.ge-c.sel{outline:2px solid #b3121b;outline-offset:1px}
+@media(max-width:760px){.ge-bar{flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
@@ -436,16 +450,17 @@ document.querySelectorAll('.street').forEach(st=>{
  const cv=st.querySelector('canvas.view')||st.querySelector('canvas'),x=cv.getContext('2d'),bar=st.querySelector('.sbar i'),zn=st.querySelector('.zn');
  cv.width=W;cv.height=H;let ox=START[st.dataset.world]||0,target=ox;
  const max=WORLD-W;
+ const ZT=ZONES.map(([zx,n],i)=>{const e=i<ZONES.length-1?ZONES[i+1][0]:WORLD;return [Math.max(0,Math.min(max,Math.round((zx+e)/2-W/2))),n]});
  st._draw=()=>{drawWorld(x,ox);bar.style.width=(W/WORLD*100)+'%';bar.style.left=(ox/WORLD*100)+'%';
-  let z=ZONES[0][1];ZONES.forEach(([zx,n])=>{if(ox+W*.3>=zx)z=n});if(zn)zn.textContent=z;
-  st.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.textContent==z||(b.dataset.x==Math.round(target)&&false)))};
+  let z=ZT[0][1],bd=1e9;ZT.forEach(([tx,n])=>{const d=Math.abs(tx-ox);if(d<bd){bd=d;z=n}});if(zn)zn.textContent=z;
+  st.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.textContent==z))};
  const set=v=>{target=Math.max(0,Math.min(max,v))};
  let drag=null;
  cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,o:target};cv.setPointerCapture(e.pointerId)});
  cv.addEventListener('pointermove',e=>{if(drag){const s=W/cv.getBoundingClientRect().width;set(drag.o-(e.clientX-drag.x)*s)}});
  cv.addEventListener('pointerup',()=>drag=null);
  cv.addEventListener('wheel',e=>{e.preventDefault();set(target+(e.deltaY+e.deltaX)*.15)},{passive:false});
- st.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>set(+b.dataset.x));
+ st.querySelectorAll('.tabs button').forEach(b=>{const t=ZT.find(z=>z[1]==b.textContent);b.onclick=()=>set(t?t[0]:+b.dataset.x)});
  const mm=st.querySelector('canvas.mm');if(mm){mm.addEventListener('click',e=>{const r=mm.getBoundingClientRect();set((e.clientX-r.left)/r.width*WORLD-W/2)})}
  (function loop(){ox+=(target-ox)*.15;if(mm)drawMini(mm,ox);if(st.closest('.page.on'))st._draw();requestAnimationFrame(loop)})();
 });
@@ -515,7 +530,7 @@ const DAYS=['일','월','화','수','목','금','토'];const DSTR=`${TODAY.getMo
  a.onended=()=>{i=(i+1)%list().length;play()};show();})();
 
 // ── 갤러리 (gallery 폴더 이미지)
-const GAL={"frame": [{"src": "gallery/pair/pair05.jpg", "w": 1600, "h": 686, "t": "페어틀 1"}, {"src": "gallery/pair/pair06.jpg", "w": 1600, "h": 1382, "t": "페어틀 2"}], "sang": [{"src": "gallery/sang/sang01.jpg", "w": 300, "h": 300, "t": "SD"}, {"src": "gallery/sang/sang02.png", "w": 1000, "h": 1000, "t": "나나곰 바게트"}, {"src": "gallery/sang/sang03.png", "w": 600, "h": 600, "t": "나나곰"}, {"src": "gallery/sang/sang04.png", "w": 600, "h": 600, "t": "나나곰 2"}, {"src": "gallery/sang/sang05.jpg", "w": 1080, "h": 1500, "t": "야구"}, {"src": "gallery/sang/sang06.jpg", "w": 1067, "h": 1600, "t": "전신"}, {"src": "gallery/sang/sang07.jpg", "w": 200, "h": 200, "t": "두상"}, {"src": "gallery/sang/sang08.jpg", "w": 1080, "h": 1500, "t": "증명사진"}, {"src": "gallery/sang/sang09.jpg", "w": 1080, "h": 1500, "t": "증명사진 2"}, {"src": "gallery/sang/sang10.jpg", "w": 1100, "h": 1500, "t": "증명사진 3"}, {"src": "gallery/sang/sang11.jpg", "w": 1100, "h": 1414, "t": "증명사진 4"}, {"src": "gallery/sang/sang12.jpg", "w": 1322, "h": 1600, "t": "학생증"}, {"src": "gallery/sang/sang13.png", "w": 1000, "h": 1110, "t": "부위별 터치 반응"}, {"src": "gallery/sang/sang14.jpg", "w": 700, "h": 900, "t": "성향표"}, {"src": "gallery/sang/sang15.jpg", "w": 700, "h": 900, "t": "성향표 2"}, {"src": "gallery/sang/sang16.jpg", "w": 400, "h": 400, "t": "도장"}, {"src": "gallery/sang/sang17.jpg", "w": 500, "h": 500, "t": "도장 2"}, {"src": "gallery/sang/sang18.jpg", "w": 1600, "h": 951, "t": "파닥파닥"}, {"src": "gallery/sang/sang19.jpg", "w": 600, "h": 600, "t": "이 고양이 놈"}, {"src": "gallery/sang/sang20.jpg", "w": 600, "h": 600, "t": "이 고양이 놈 2"}], "su": [{"src": "gallery/su/su01.jpg", "w": 340, "h": 340, "t": "아이콘"}, {"src": "gallery/su/su02.jpg", "w": 778, "h": 1600, "t": "전신"}, {"src": "gallery/su/su03.jpg", "w": 720, "h": 960, "t": "증명사진"}, {"src": "gallery/su/su04.jpg", "w": 800, "h": 945, "t": "리퀘스트"}, {"src": "gallery/su/su05.jpg", "w": 800, "h": 1355, "t": "의상 선물"}, {"src": "gallery/su/su06.jpg", "w": 1306, "h": 776, "t": "파닥파닥"}, {"src": "gallery/su/su07.jpg", "w": 600, "h": 600, "t": "이 표범 놈"}, {"src": "gallery/su/su08.jpg", "w": 1192, "h": 1600, "t": "그림"}, {"src": "gallery/su/su09.png", "w": 720, "h": 720, "t": "그림"}, {"src": "gallery/su/su10.png", "w": 600, "h": 600, "t": "그림"}, {"src": "gallery/su/su11.png", "w": 1000, "h": 1000, "t": "그림"}], "pair": [{"src": "gallery/pair/pair01.jpg", "w": 1600, "h": 1125, "t": "할로윈"}, {"src": "gallery/pair/pair02.jpg", "w": 1600, "h": 1125, "t": "할로윈 2"}, {"src": "gallery/pair/pair03.jpg", "w": 1600, "h": 1337, "t": "둘이"}, {"src": "gallery/pair/pair04.jpg", "w": 1200, "h": 600, "t": "고양이들"}], "shop": [{"src": "gallery/shop/shop01.png", "w": 680, "h": 680, "t": "Battle Archenemy 아이콘 1"}, {"src": "gallery/shop/shop02.png", "w": 680, "h": 680, "t": "Battle Archenemy 아이콘 2"}]};
+const GAL={"frame": [{"src": "gallery/pair/pair05.jpg", "w": 1600, "h": 686, "t": "페어틀 1"}, {"src": "gallery/pair/pair06.jpg", "w": 1600, "h": 1382, "t": "페어틀 2"}], "sang": [{"src": "gallery/sang/sang01.jpg", "w": 300, "h": 300, "t": "SD"}, {"src": "gallery/sang/sang02.png", "w": 1000, "h": 1000, "t": "나나곰 바게트"}, {"src": "gallery/sang/sang03.png", "w": 600, "h": 600, "t": "나나곰", "g": "g1"}, {"src": "gallery/sang/sang04.png", "w": 600, "h": 600, "t": "나나곰 2", "g": "g1"}, {"src": "gallery/sang/sang05.jpg", "w": 1080, "h": 1500, "t": "야구"}, {"src": "gallery/sang/sang06.jpg", "w": 1067, "h": 1600, "t": "전신"}, {"src": "gallery/sang/sang07.jpg", "w": 200, "h": 200, "t": "두상"}, {"src": "gallery/sang/sang08.jpg", "w": 1080, "h": 1500, "t": "증명사진", "g": "g2"}, {"src": "gallery/sang/sang09.jpg", "w": 1080, "h": 1500, "t": "증명사진 2", "g": "g2"}, {"src": "gallery/sang/sang10.jpg", "w": 1100, "h": 1500, "t": "증명사진 3", "g": "g2"}, {"src": "gallery/sang/sang11.jpg", "w": 1100, "h": 1414, "t": "증명사진 4", "g": "g2"}, {"src": "gallery/sang/sang12.jpg", "w": 1322, "h": 1600, "t": "학생증"}, {"src": "gallery/sang/sang13.png", "w": 1000, "h": 1110, "t": "부위별 터치 반응"}, {"src": "gallery/sang/sang14.jpg", "w": 700, "h": 900, "t": "성향표", "g": "g3"}, {"src": "gallery/sang/sang15.jpg", "w": 700, "h": 900, "t": "성향표 2", "g": "g3"}, {"src": "gallery/sang/sang16.jpg", "w": 400, "h": 400, "t": "도장", "g": "g4"}, {"src": "gallery/sang/sang17.jpg", "w": 500, "h": 500, "t": "도장 2", "g": "g4"}, {"src": "gallery/sang/sang18.jpg", "w": 1600, "h": 951, "t": "파닥파닥"}, {"src": "gallery/sang/sang19.jpg", "w": 600, "h": 600, "t": "이 고양이 놈", "g": "g5"}, {"src": "gallery/sang/sang20.jpg", "w": 600, "h": 600, "t": "이 고양이 놈 2", "g": "g5"}], "su": [{"src": "gallery/su/su01.jpg", "w": 340, "h": 340, "t": "아이콘"}, {"src": "gallery/su/su02.jpg", "w": 778, "h": 1600, "t": "전신"}, {"src": "gallery/su/su03.jpg", "w": 720, "h": 960, "t": "증명사진"}, {"src": "gallery/su/su04.jpg", "w": 800, "h": 945, "t": "리퀘스트"}, {"src": "gallery/su/su05.jpg", "w": 800, "h": 1355, "t": "의상 선물"}, {"src": "gallery/su/su06.jpg", "w": 1306, "h": 776, "t": "파닥파닥"}, {"src": "gallery/su/su07.jpg", "w": 600, "h": 600, "t": "이 표범 놈"}, {"src": "gallery/su/su08.jpg", "w": 1192, "h": 1600, "t": "그림"}, {"src": "gallery/su/su09.png", "w": 720, "h": 720, "t": "그림"}, {"src": "gallery/su/su10.png", "w": 600, "h": 600, "t": "그림"}, {"src": "gallery/su/su11.png", "w": 1000, "h": 1000, "t": "그림"}], "pair": [{"src": "gallery/pair/pair01.jpg", "w": 1600, "h": 1125, "t": "할로윈", "g": "g6"}, {"src": "gallery/pair/pair02.jpg", "w": 1600, "h": 1125, "t": "할로윈 2", "g": "g6"}, {"src": "gallery/pair/pair03.jpg", "w": 1600, "h": 1337, "t": "둘이"}, {"src": "gallery/pair/pair04.jpg", "w": 1200, "h": 600, "t": "고양이들"}], "shop": [{"src": "gallery/shop/shop01.png", "w": 680, "h": 680, "t": "Battle Archenemy 아이콘 1", "g": "g7"}, {"src": "gallery/shop/shop02.png", "w": 680, "h": 680, "t": "Battle Archenemy 아이콘 2", "g": "g7"}]};
 (function(){const lb=document.getElementById('lb'),li=lb.querySelector('img'),lp=lb.querySelector('p');let cur=[],ci=0;
  const open=window.openLB=(arr,i)=>{cur=arr;ci=i;show();lb.classList.add('on')};const show=()=>{li.src=cur[ci].src;lp.textContent=cur[ci].t+'  ·  '+(ci+1)+' / '+cur.length};
  lb.querySelector('.lx').onclick=()=>lb.classList.remove('on');lb.onclick=e=>{if(e.target===lb)lb.classList.remove('on')};
