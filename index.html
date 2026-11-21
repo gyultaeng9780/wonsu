@@ -277,9 +277,23 @@ body{min-height:900px}
 .ge-f .ghost{background:none;border-color:#444;color:#bbb}
 .ge-pw{position:absolute;inset:0;background:#000b;display:none;align-items:center;justify-content:center}.ge-pw.on{display:flex}
 @media(max-width:760px){.ged{flex-direction:column;gap:8px}.ge-h{flex-direction:column}.ge-tabs{justify-content:center}.ge-list{grid-template-columns:1fr 1fr}}
+
+/* 창 크기에 맞춰 전체 비율 확대·축소 (1440×900 기준) */
+@media (min-width:901px){
+ html{overflow:hidden}
+ body{zoom:var(--z,1);min-height:0}
+ .wrap{margin-left:calc(320px + var(--ox,0px));min-height:calc(100vh / var(--z,1))}
+ .side{left:calc(40px + var(--ox,0px))}
+ .bgchar{left:calc(80px + var(--ox,0px))}
+}
 </style>
 </head>
 <body>
+<script>(()=>{const f=()=>{const w=innerWidth,h=innerHeight,r=document.documentElement.style;
+ if(w<=900){r.setProperty('--z',1);r.setProperty('--ox','0px');window.WZ=1;return}
+ const z=Math.min(w/1440,h/900);window.WZ=z;r.setProperty('--z',z);r.setProperty('--ox',Math.max(0,(w/z-1440)/2)+'px')};
+ f();addEventListener('resize',f)})();</script>
+
 <svg width="0" height="0" style="position:absolute"><defs><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 0"/></filter></defs></svg>
 <div class="bgchar">怨讐</div>
 
@@ -428,7 +442,7 @@ document.querySelectorAll('.street').forEach(st=>{
  const set=v=>{target=Math.max(0,Math.min(max,v))};
  let drag=null;
  cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,o:target};cv.setPointerCapture(e.pointerId)});
- cv.addEventListener('pointermove',e=>{if(drag){const s=W/cv.clientWidth;set(drag.o-(e.clientX-drag.x)*s)}});
+ cv.addEventListener('pointermove',e=>{if(drag){const s=W/cv.getBoundingClientRect().width;set(drag.o-(e.clientX-drag.x)*s)}});
  cv.addEventListener('pointerup',()=>drag=null);
  cv.addEventListener('wheel',e=>{e.preventDefault();set(target+(e.deltaY+e.deltaX)*.15)},{passive:false});
  st.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>set(+b.dataset.x));
@@ -465,7 +479,7 @@ document.querySelectorAll('.page').forEach(pg=>{const box=pg.querySelector('.box
  const up=()=>{const r=box.clientHeight/box.scrollHeight;rail.classList.toggle('on',r<.999);const rh=rail.clientHeight;const t=Math.max(30,rh*r);th.style.height=t+'px';th.style.top=((rh-t)*(box.scrollTop/((box.scrollHeight-box.clientHeight)||1)))+'px'};
  box.addEventListener('scroll',up);new ResizeObserver(up).observe(box);new MutationObserver(up).observe(box,{childList:true,subtree:true});pg._up=up;
  let d=null;th.addEventListener('pointerdown',e=>{d={y:e.clientY,s:box.scrollTop};rail.classList.add('drag');th.setPointerCapture(e.pointerId)});
- th.addEventListener('pointermove',e=>{if(!d)return;const rh=rail.clientHeight,t=th.clientHeight;box.scrollTop=d.s+(e.clientY-d.y)*(box.scrollHeight-box.clientHeight)/(rh-t)});
+ th.addEventListener('pointermove',e=>{if(!d)return;const rh=rail.clientHeight,t=th.clientHeight;box.scrollTop=d.s+(e.clientY-d.y)/(window.WZ||1)*(box.scrollHeight-box.clientHeight)/(rh-t)});
  th.addEventListener('pointerup',()=>{d=null;rail.classList.remove('drag')});
  rail.addEventListener('click',e=>{if(e.target!==rail)return;const r=rail.getBoundingClientRect();box.scrollTop=(e.clientY-r.top)/r.height*(box.scrollHeight-box.clientHeight)})});
 addEventListener('hashchange',()=>setTimeout(()=>document.querySelectorAll('.page.on').forEach(p=>p._up&&p._up()),30));
