@@ -313,6 +313,7 @@ body{min-height:900px}
 /* 자간이 있는 가운데 글자: 마지막 글자 뒤 자간만큼 앞을 채워 정확히 가운데로 */
 #pf-n{display:inline-block;text-indent:.2em}
 @media (max-width:1100px){.ph .k{text-indent:6px}.ftk{text-indent:2px}.pcol .who{text-indent:2px}}
+#meet-rows .row.none span{color:#666}
 </style>
 </head>
 <body>
@@ -434,9 +435,9 @@ body{min-height:900px}
 </main>
 
 <div class="lb" id="lb"><button class="lx" aria-label="닫기"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 3L13 13M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><button class="lp" aria-label="이전"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3L5 8L10 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><img alt=""><p></p><button class="ln" aria-label="다음"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3L11 8L6 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
-<script src="street.js?v=20261121d"></script>
-<script src="marker.js?v=20261121d"></script>
-<script src="qna.js?v=20261121d" defer></script>
+<script src="street.js?v=20261122a"></script>
+<script src="marker.js?v=20261122a"></script>
+<script src="qna.js?v=20261122a" defer></script>
 <script>
 // ── 페이지 전환
 function route(){
@@ -486,14 +487,7 @@ document.querySelectorAll('.street').forEach(st=>{
 window.addLog=(who,text,time)=>{const ul=document.getElementById('log');if(!ul)return;const li=document.createElement('li');
  const t=time||new Date().toTimeString().slice(0,5);
  li.innerHTML=`<span class="tm">${t}</span><span class="msg">${text}</span>`;ul.prepend(li)};
-[['su','오수연은 출근 준비를 마쳤다. 오늘도 5분 일찍이다.','07:40'],
- ['su','오수연은 횡단보도 앞에서 신호를 기다렸다. 빨간불이 유난히 길다.','07:52'],
- ['sang','원상혁은 늦잠을 잤다. 알람은 세 번 울렸다.','08:30'],
- ['su','오수연은 회사에 도착해 장부를 펼쳤다. 숫자가 맞지 않는다.','09:00'],
- ['sang','원상혁은 체육관 문을 열었다. 샌드백이 어제 그대로다.','10:10'],
- ['su','오수연은 편의점에 가서 삼각김밥을 먹었다. 평범한 맛이다.','12:20'],
- ['sang','원상혁은 같은 편의점에 들어왔다. 공기가 싸늘해졌다.','12:21'],
- ['su','오수연은 못 본 척 편의점을 나갔다.','12:22']].forEach(a=>addLog(...a));
+
 
 // ── 플레이리스트 (img에 앨범 이미지 경로를 넣으면 표지로 나와요)
 const PLAY={a:{name:'원상혁',tracks:[]},b:{name:'오수연',tracks:[]}};
@@ -557,6 +551,6 @@ const GAL={"frame": [{"src": "gallery/pair/pair05.jpg", "w": 1600, "h": 686, "t"
 route();setTimeout(()=>document.querySelectorAll('.page.on').forEach(p=>p._up&&p._up()),60);
 </script>
 
-<script src="gal-edit.js?v=20261121d" defer></script>
+<script src="gal-edit.js?v=20261122a" defer></script><script src="sim.js?v=20261122a" defer></script>
 </body>
 </html>
