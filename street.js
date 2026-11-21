@@ -147,7 +147,10 @@ function post(){const S=window.STREET_STYLE===undefined?'gray':window.STREET_STY
 function fx(){const t=(Date.now()/16)|0;
  if(TH=='rain'){ // 젖은 도로 반사 + 비
   for(const [a,w,c] of [[30,40,C.lit],[110,56,C.lit],[340,100,C.lit],[516,72,C.red],[200,80,C.leaf2]]){for(let j=0;j<7;j++)for(let i=0;i<w;i+=2){if((i+j*3+t)%5<2){x.fillStyle=c;x.globalAlpha=.25-j*.03;x.fillRect(a+i-ox,GY+5+j*2,1,1)}}}x.globalAlpha=1;
-  x.fillStyle='#aab6d0';for(let i=0;i<140;i++){const rx=(i*41+t*2)%W,ry=(i*23+t*5)%H;x.globalAlpha=.5;x.fillRect(rx,ry,1,3)}x.globalAlpha=1}
+  const hr=n=>{n=Math.imul(n^97,2654435761)>>>0;n^=n>>>13;return (n%10000)/10000};x.fillStyle='#9aa6bf';
+  for(let i=0;i<46;i++){const sp=2.2+hr(i+7)*1.4,len=2+(hr(i+3)*3|0),y0=((hr(i+500)*(GY+20)+t*sp)%(GY+20))|0,x0=((hr(i)*W-y0*.25)%W+W)%W|0;
+   x.globalAlpha=.18+hr(i+9)*.22;x.fillRect(x0,y0,1,len)}
+  for(let i=0;i<6;i++){const k=(t/6|0)+i*13,sx=(hr(k)*W)|0;x.globalAlpha=.35;x.fillRect(sx-1,GY+3+(i%3),3,1)}x.globalAlpha=1}
  if(TH=='snow'){ // 지붕 눈 + 눈송이
   for(const [a,y,w] of [[40,40,51],[95,32,51],[150,46,51],[394,62,62],[466,50,84],[562,58,52],[620,7,164],[794,3,80],[930,37,124],[1061,42,92]]){R(a,y-1,w,2,'#eef2f8');for(let i=0;i<w;i+=3)P(a+i,y-2,'#dfe4ee')}
   const hs=n=>{n=Math.imul(n^61,2654435761)>>>0;n^=n>>>15;return (n%10000)/10000};for(let i=0;i<110;i++){const sx=((hs(i)*W+t*.25*(1+i%3)+Math.sin(t/30+i)*2)%W+W)%W|0,sy=((hs(i+999)*H+t*(.4+(i%3)*.25))%H)|0;x.fillStyle='#fff';x.globalAlpha=i%3?.8:.5;x.fillRect(sx,sy,i%4?1:2,i%4?1:2)}x.globalAlpha=1}
