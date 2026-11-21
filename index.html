@@ -27,7 +27,7 @@ body{min-height:900px}
 .page{display:none}.page.on{display:block}
 .k{font:12px ui-monospace,monospace;letter-spacing:6px;color:var(--red)}
 .red{color:var(--red2)}
-.tag{display:inline-flex;align-items:center;justify-content:center;height:28px;padding:0 9px 0 12px;background:var(--red);color:#fff;font:12px ui-monospace,monospace;letter-spacing:3px}
+.tag{display:inline-flex;align-items:center;justify-content:center;height:28px;padding:0 12px;text-indent:3px;background:var(--red);color:#fff;font:12px ui-monospace,monospace;letter-spacing:3px}
 /* 메인 */
 .hero{height:520px;background:url(img/hero.jpg) no-repeat 30% 18%/120% auto;position:relative}
 .hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:220px;background:linear-gradient(transparent,var(--card))}
@@ -307,6 +307,10 @@ body{min-height:900px}
 .ge-gt{position:absolute;right:6px;bottom:6px;height:20px;padding:0 8px;border-radius:10px;color:#fff;font:11px/1 'Noto Sans KR',sans-serif;display:flex;align-items:center;justify-content:center}
 .ge-c.ing{border-color:var(--gc)}.ge-c.sel{outline:2px solid #b3121b;outline-offset:1px}
 @media(max-width:760px){.ge-bar{flex-direction:column;text-align:center}}
+
+/* 자간이 있는 가운데 글자: 마지막 글자 뒤 자간만큼 앞을 채워 정확히 가운데로 */
+#pf-n{display:inline-block;text-indent:.2em}
+@media (max-width:1100px){.ph .k{text-indent:6px}.ftk{text-indent:2px}.pcol .who{text-indent:2px}}
 </style>
 </head>
 <body>
